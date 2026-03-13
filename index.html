@@ -1,19 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game Launcher</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 50px; background: #111; color: white; }
+        button { padding: 15px 30px; font-size: 20px; cursor: pointer; border-radius: 10px; border: none; background: #007bff; color: white; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Bird Game Unblocked</h1>
+    <p>Click below to launch the game in a stealth window.</p>
+    <button onclick="launchGame()">Launch Game</button>
 
+    <script>
+        function launchGame() {
+            // This is your specific game code formatted for the Blob
+            const gameHtml = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/paigerodeghero/academicwebsite@897c910c65e6c68b04c44a6b6eba0b99d0f2f2cf/TemplateData/style.css">
+                    <script src="https://cdn.jsdelivr.net/gh/lee2sman/everyday@d45d601d2c4d60adf809a0b677c00b7d12aba7e9/96/TemplateData/UnityProgress.js"><\/script>
+                    <script src="https://cdn.jsdelivr.net/gh/gertdoro/UnityExplorer@cffa09e09790018403c996d37adb6c4450e8f6c6/Runtime/birds/birds.js"><\/script>
+                    <style>
+                        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: black; }
+                    </style>
+                </head>
+                <body>
+                    <div class="webgl-content">
+                        <div id="gameContainer" style="width: 100vw; height: 100vh"></div>
+                    </div>
+                    <script>
+                        var gameInstance = UnityLoader.instantiate("gameContainer", "https://cdn.jsdelivr.net/gh/gertdoro/UnityExplorer@cffa09e09790018403c996d37adb6c4450e8f6c6/Runtime/birds/birds.json", {
+                            onProgress: UnityProgress,
+                            Module: {
+                                onRuntimeInitialized: function () {
+                                    UnityProgress(gameInstance, "complete")
+                                }
+                            }
+                        });
+                    <\/script>
+                </body>
+                </html>
+            `;
 
+            // Create the secret Blob
+            const blob = new Blob([gameHtml], { type: 'text/html' });
+            const blobUrl = URL.createObjectURL(blob);
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/paigerodeghero/academicwebsite@897c910c65e6c68b04c44a6b6eba0b99d0f2f2cf/TemplateData/style.css">
-<script src="https://cdn.jsdelivr.net/gh/lee2sman/everyday@d45d601d2c4d60adf809a0b677c00b7d12aba7e9/96/TemplateData/UnityProgress.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/gertdoro/UnityExplorer@cffa09e09790018403c996d37adb6c4450e8f6c6/Runtime/birds/birds.js"></script>
-<script>
-    var gameInstance = UnityLoader.instantiate("gameContainer", "https://cdn.jsdelivr.net/gh/gertdoro/UnityExplorer@cffa09e09790018403c996d37adb6c4450e8f6c6/Runtime/birds/birds.json", {
-        onProgress: UnityProgress,
-        Module: {
-            onRuntimeInitialized: function () {
-                UnityProgress(gameInstance, "complete")
-            }
+            // Open the game in a new tab
+            window.open(blobUrl, "_blank");
         }
-    });
-</script>
-<div class="webgl-content">
-    <div id="gameContainer" style="width: 100vw; height: 100vh"></div>
-</div>
+    </script>
+</body>
+</html>
